@@ -97,9 +97,9 @@ const CharSheet = ({
   totalXP,
   unspentXP,
   stats,
-  toughness,
-  corruption,
-  composure,
+  toughness = {},
+  corruption = {},
+  composure = {},
   abilities,
   traits,
   gear: {
@@ -119,13 +119,13 @@ const CharSheet = ({
         <XP> Unspent XP: {unspentXP} | Total XP: {totalXP} XP)</XP>
       </Header>
         <Trackers>
-          <StyledTracker stat="Toughness" currentValue={toughness.current} maxValue={toughness.max}/>
-          <StyledTracker stat="Corruption" currentValue={corruption.current} maxValue={corruption.max}/>
-          <StyledTracker stat="Composure" currentValue={composure.current} maxValue={composure.max}/>
+          <StyledTracker stat="Toughness" currentValue={toughness && toughness.current} maxValue={toughness && toughness.max}/>
+          <StyledTracker stat="Corruption" currentValue={corruption && corruption.current} maxValue={corruption && corruption.max}/>
+          <StyledTracker stat="Composure" currentValue={composure && composure.current} maxValue={composure && composure.max}/>
         </Trackers>
       <Divider type="two"/>
       <Stats>
-        {stats.map(stat => (
+        {(stats || []).map(stat => (
           <StatBlock {...stat} key={stat.name} />
         ))}
       </Stats>
