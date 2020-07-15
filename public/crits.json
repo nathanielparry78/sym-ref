@@ -1,0 +1,24 @@
+{
+  "section": "crits",
+  "title": "Perfect Hits & Fumbled Defense",
+  "pageRef": "CRB 179",
+  "notes": "Feats cost one (1) Experience – or one (1) permanent corruption – to activate.",
+  "items": [
+    {
+      "name": "Perfect Hit (1 when attacking)",
+      "text": "The player character deals +1D6 damage."
+    },
+    {
+      "name": "Fumbled Attack (20 when attacking)",
+      "text": "The enemy receives a Free Attack against the player character."
+    },
+    {
+      "name": "Perfect Defense (1 when rolling DEFENSE)",
+      "text": "The player character receives a Free Attack against the attacking enemy."
+    },
+    {
+      "name": "Fumbled Defense (20 when rolling DEFENSE)",
+      "text": "The enemy deals +3 damage."
+    }
+  ]
+}

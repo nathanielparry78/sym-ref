@@ -1,0 +1,60 @@
+{
+  "section": "maneuvers",
+  "title": "Maneuvers",
+  "pageRef": "APG 103",
+  "notes": "",
+  "items": [
+    {
+      "name": "Careful Aiming",
+      "text": "You take the time to aim carefully with a ranged weapon and get a second chance to pass the attack test. The cost is a movement action, meaning that you cannot move during the turn."
+    },
+    {
+      "name": "Charge",
+      "text": "You charge at the enemy and make a double movement plus a combat action in melee. The charge must be in a straight line towards the target. If the attack test fails, the target gets to make a Free Attack."
+    },
+    {
+      "name": "Delay the Initiative",
+      "text": "You choose to delay your initiative during the turn, to let someone else go first. When it is your time to act, you specify who will get to act before you. The next turn, you are back at your normal place in the order of initiative."
+    },
+    {
+      "name": "Disarm",
+      "text": "You attack the enemy’s weapon or shield, hoping to make him or her drop it [ACCURATE←STRONG]. The attack deals no damage, and if the test fails you expose yourself to a Free Attack from the enemy."
+    },
+    {
+      "name": "Full Defense",
+      "text": "You stake everything on defense and have a second chance to pass all DEFENSE tests during the turn. You are not allowed to perform any attacks."
+    },
+    {
+      "name": "Full Offense",
+      "text": "You stake everything on melee attacks for a turn, giving you a second chance to pass all melee attacks. Because of this you simultaneously have a second chance to fail all DEFENSE test during the turn."
+    },
+    {
+      "name": "Hold (Grapple)",
+      "text": "You attack with a wrestling maneuver aimed at stopping the target from moving [STRONG←STRONG]. The trait ROBUST gives a bonus to the test: +2 at level I, +4 at level II and +8 at level III, which applies to both the wrestler and its target, if the latter is ROBUST. A test is made each turn to maintain the hold. If the test fails, the target gets to make a Free Attack. Also, note that you cannot perform any other actions while maintaining the hold."
+    },
+    {
+      "name": "Knock Out",
+      "text": "You attack from an Advantage, aiming to render the target uncon- scious. The attack is made as usual, but instead of dealing damage, 1d12 is rolled against the damage value; if the outcome is lower than the value, the target is knocked out. If the attack fails, you lose the Advantage over the target (see page 162 in the Core Rulebook for more on Advantage)."
+    },
+
+    {
+      "name": "Poison on Weapons",
+      "text": "With a passed CUNNING test, you may use a combat action to apply poison to your weapon. If the outcome is 20 something goes wrong and you yourself are poisoned. The poison is enough for one hit, then a new dose must be applied."
+    },
+
+    {
+      "name": "Push Back",
+      "text": "You lunge at the target with the intention of pushing it backwards – out of a room, over the edge of a cliff or similar. You have to start your turn with the push and must spend both your combat and your movement action doing so. A passed attack test deals half damage but will also push the target half a movement back (five meters). If the test fails, the target gets to make a Free Attack."
+    },
+
+    {
+      "name": "Tackle",
+      "text": "You attack hoping to knock down the target [STRONG←STRONG]. The risk is that you also topple over, whether you make a successful tackle or not; a passed QUICK test lets you remain standing. The tackle counts as your combat action and if you are ROBUST you add +2 to the STRONG test per level acquired in the trait."
+    },
+
+    {
+      "name": "Take the Initiative",
+      "text": "You roll a RESOLUTE test hoping to gain the initiative. If suc- cessful you gain a +5 bonus when deciding your place in the order of initiative. The downside is that your speed has a negative impact on your precision; you have a second chance to fail all success test during the turn, no matter if the RESOLUTE test was successful or not. The next turn, you are back to your normal place in the order of initiative."
+    }
+  ]
+}

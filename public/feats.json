@@ -1,0 +1,40 @@
+{
+  "section": "feats",
+  "title": "Feats",
+  "pageRef": "APG 99",
+  "notes": "Feats cost one (1) Experience – or one (1) permanent corruption – to activate.",
+  "items": [
+    {
+      "name": "Clean Hit",
+      "text": "The hero makes a normal attack and the successful hit or hits deal maximum damage."
+    },
+    {
+      "name": "Fearless",
+      "text": "The hero ignores horror effects, like from the monstrous trait TERRIFY."
+    },
+    {
+      "name": "Ignore Corruption",
+      "text": "During the rest of the turn, the accumulated corruption of the hero does not matter; all tests are made as if he or she had zero corruption. However, the hero suffers corruption as usual, which comes into play the following turn."
+    },
+    {
+      "name": "Perfect Defense",
+      "text": "The hero parries or dodges a successful attack that otherwise would have hit him or her. Perfect Defense may only be used once per turn."
+    },
+    {
+      "name": "Quick Strike",
+      "text": "The hero attacks first in the turn. If someone else is using Quick Strike, the order of initiative is settled in the normal way."
+    },
+    {
+      "name": "Resilience",
+      "text": "+1d4 Armor for the rest of the turn."
+    },
+    {
+      "name": "Steely Gaze",
+      "text": "The hero’s gaze makes an enemy step back and refrain from attacking the hero. If the fight is already on, the enemy may choose to attack another creature; if the fight has not started, the enemy will not attack before someone else deals the first blow."
+    },
+    {
+      "name": "Whirlwind Attack",
+      "text": "In one combat action, the hero performs one attack against each enemy engaged in melee."
+    }
+  ]
+}
