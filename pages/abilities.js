@@ -2,6 +2,8 @@ import {useState, useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import {Ability} from '../components/ability';
 import flatAbilities from '../public/symbaroum-data-flat.json';
+import background from "../public/parchment-30.jpg";
+
 
 const StyledForm = styled.form`
   position: relative;
@@ -36,12 +38,12 @@ const SuggestItem = styled.li`
 `
 
 const AbilityBlock = styled.div`
-  background: white;
+  background: url(${background});
   margin: .5em;
   padding: .5em 1em 1.25em ;
   position: relative;
   border-radius: 5px;
-  box-shadow: 0px 4px 6px 2px #212121;;
+  box-shadow: 0px 4px 6px 2px #212121;
   z-index: 5;
 `
 

@@ -12,7 +12,6 @@ import monster from '../public/monster2.png'
 const Modal = styled.div`
 	display: absolute;
 	height: auto;
-	background: white;
 	box-shadow: 0px 3px 6px #666;
 	padding: .5rem 1rem 1rem;
 	margin-top: .5rem;

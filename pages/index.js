@@ -1,62 +1,53 @@
-import useSWR from 'swr'
 import Link from 'next/link'
-import { useUser } from '../utils/auth/useUser'
+import Card from '../components/card'
+import styled from 'styled-components'
 
-const fetcher = (url, token) =>
-  fetch(url, {
-    method: 'GET',
-    headers: new Headers({ 'Content-Type': 'application/json', token }),
-    credentials: 'same-origin',
-  }).then((res) => res.json())
+const H1 = styled.h1`
+	font-family: 'IM Fell Great Primer SC', serif;
+  font-size: 2rem;
+`
+
+const Input = styled.input`
+  width: calc(100% - 1rem);
+  padding: .25rem .5rem;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 5px;
+  border: 1px solid #666;
+
+
+`
 
 const Index = () => {
-  const { user, logout } = useUser()
-  const { data, error } = useSWR(
-    user ? ['/api/getFood', user.token] : null,
-    fetcher
-  )
-  if (!user) {
-    return (
-      <>
-        <p>Hi there!</p>
-        <p>
-          You are not signed in.{' '}
-          <Link href={'/auth'}>
-            <a>Sign in</a>
-          </Link>
-        </p>
-      </>
-    )
+
+  const handleSubmit = (e) => {
+    console.log(e.target)
   }
 
   return (
-    <div>
-      <div>
-        <p>You're signed in. Email: {user.email}</p>
-        <p
-          style={{
-            display: 'inline-block',
-            color: 'blue',
-            textDecoration: 'underline',
-            cursor: 'pointer',
-          }}
-          onClick={() => logout()}
-        >
-          Log out
-        </p>
-      </div>
-      <div>
-        <Link href={'/example'}>
-          <a>Another example page</a>
-        </Link>
-      </div>
-      {error && <div>Failed to fetch food!</div>}
-      {data ? (
-        <div>Your favorite food is {data.food}.</div>
-      ) : (
-        <div>Loading...</div>
-      )}
-    </div>
+    <Card>
+      <H1>Welcome!</H1>
+      <form onSubmit={handleSubmit}>
+        <Input
+          type="text"
+          name="username"
+          label="Username"
+          placeholder="Username"
+        />
+        <Input
+          type="password"
+          name="password"
+          label="Password"
+          placeholder="Password"
+        />
+        <button type="submit">Go</button>
+      </form>
+
+      <Link href="./auth">
+        <a>Sign up</a>
+
+      </Link>
+    </Card>
   )
 }
 

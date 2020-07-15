@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { AbilityModal } from './abilityModal';
 import dataFlat from '../public/symbaroum-data-flat.json';
 
+
 const AbilityBlock = styled.div`
 	padding-top: .5em;
 	padding-bottom: 1em;

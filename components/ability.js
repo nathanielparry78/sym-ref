@@ -1,11 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { createGlobalStyle } from "styled-components";
-
-const GlobalStyles = createGlobalStyle`
-	@import url('https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer+SC&display=swap');
-`
 const Name = styled.span`
 	font-family: 'IM Fell Great Primer SC', serif;
 	font-size: 1.5rem;
@@ -33,7 +28,7 @@ const Requirement = styled.div`
 const TierBlock = styled.li`
 	list-style: none;
 	padding-left: 2rem;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #666;
 	border-width: 90%;
 	padding-top: .5rem;
 	padding-bottom: .75rem;
@@ -64,7 +59,6 @@ export const Ability = ({
 	master,
 	tier=3}) => (
 	<div className={className}>
-		<GlobalStyles/>
 		<Name>{name}</Name>
 		<Source>{source}</Source>
 		{requirement &&
