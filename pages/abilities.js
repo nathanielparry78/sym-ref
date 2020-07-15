@@ -13,16 +13,22 @@ const StyledForm = styled.form`
 const StyledInput = styled.input`
   padding: .5em;
   font-size: 18px;
-  width: calc(100% - 1em);
+  width: 60%;
   display: block;
+  margin: 0 auto;
+  background: #eaf0f9;
+  text-align: center;
+  margin-bottom: 2rem;
 `
 
 const SuggestList = styled.ul`
   padding-left: 0;
-  background: #ffffff;
-  margin: 1px;
+  background: #eaf0f9;
+  margin: 1px auto;
   position: absolute;
-  width: calc(100vw - 2rem);
+  top: 46px;
+  left: 20%;
+  width: 60%;
   box-shadow: 3px 3px 3px #222;
   z-index: 10;
 `
@@ -31,6 +37,7 @@ const SuggestItem = styled.li`
   list-style: none;
   line-height: 1.5;
   padding: .25em 1em;
+  user-select: none;
 
   &:hover {
     outline: 1px solid #067df7;
@@ -39,12 +46,13 @@ const SuggestItem = styled.li`
 
 const AbilityBlock = styled.div`
   background: url(${background});
-  margin: .5em;
   padding: .5em 1em 1.25em ;
   position: relative;
   border-radius: 5px;
   box-shadow: 0px 4px 6px 2px #212121;
   z-index: 5;
+  width: 80vw;
+  margin: 1rem auto;
 `
 
 const GarbageCan = styled.span`
@@ -88,14 +96,15 @@ const Abilities = ({className}) => {
     inputRef.current.value = "";
   };
 
-  const handleRemove = () => {
-
+  const handleRemove = (id) => {
+    const newCollection = collection.filter( item => item.id !== id)
+    setCollection(newCollection)
   };
 
   return (
     <div>
       <StyledForm className={className}>
-        <StyledInput onChange={handleInputChange} ref={inputRef}/>
+        <StyledInput onChange={handleInputChange} ref={inputRef} placeholder="Search for an ability . . ."/>
         {results.length > 0 &&
           <SuggestList>
             {results.slice(0, 9).map((item, i) =>
@@ -120,7 +129,7 @@ const Abilities = ({className}) => {
         return (
           <AbilityBlock key={ability.id}>
             <Ability tier={tier} {...ability} />
-            <GarbageCan onClick={handleRemove}>delete</GarbageCan>
+            <GarbageCan onClick={() => handleRemove(ability.id)}>delete</GarbageCan>
           </AbilityBlock>
         )
       })}
