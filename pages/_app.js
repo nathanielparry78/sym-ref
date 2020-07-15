@@ -1,30 +1,11 @@
 import Head from 'next/head'
 import Nav from '../components/nav'
-import styled from 'styled-components'
 import { Component } from 'react'
-
-
-// const GlobalStyles = createGlobalStyle`
-// 	@import url('https://fonts.googleapis.com/css?family=News+Cycle:400,700&display=swap');
-// 	@import url('https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer+SC&display=swap');
-
-// 	body {
-
-//   }
-// `
-
-const GlobalStyles = styled.div`
-  font-family: 'News Cycle', sans-serif;
-  line-height: 1.4;
-  padding: 1rem;
-  background: #222;
-`
+import '../public/global-styles.css'
 
 function App({ Component, pageProps }) {
   return (
-
     <>
-      <GlobalStyles>
       <Head>
         <title>SYM REF</title>
         <link rel="icon" href="/favicon.ico" />
@@ -32,11 +13,9 @@ function App({ Component, pageProps }) {
 
       </Head>
 
-        <Nav />
-        <Component {...pageProps} />
-      </GlobalStyles>
+      <Nav />
+      <Component {...pageProps} />
     </>
-
   )
 }
 
