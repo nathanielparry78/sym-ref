@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import CharForm from '../components/charForm'
-import styled from 'styled-components'
+import { useState, useEffect } from 'react';
+import CharForm from '../components/charForm';
+import CharSheet from '../pages/char-sheet';
+import styled from 'styled-components';
 import Button from '../components/button';
 import { Simple, Flourish, BottomLine } from '../components/dividers';
 
@@ -20,6 +21,14 @@ const Character = () => {
   const [ basics, setBasics ] = useState({});
   const [ stats, setStats ] = useState([]);
   const [ abilities, setAbilities ] = useState({});
+  const [ storedCharacter, setStoredCharacter ] = useState(null);
+
+  useEffect(() => {
+    const char = window.localStorage.getItem('character');
+    console.log(char)
+
+    char && setStoredCharacter(JSON.parse(char))
+  }, [])
 
 
   const handleBasic = (e) => {
@@ -81,21 +90,31 @@ const Character = () => {
     const string = character.name.replace(/\s/g, '')
     const name = `character-${string}`;
 
-    window.localStorage.setItem(name, JSON.stringify(character))
+    window.localStorage.setItem('character', JSON.stringify(character))
   }
 
+  console.log("SC", storedCharacter)
+
   return (
-    <Section>
-      <CharForm
-        handleBasic={handleBasic}
-        handleStats={handleStats}
-        handleAbilities={handleAbilities}
-        submitBasic={submitBasic}
-        submitStats={submitStats}
-        submitAbilities={submitAbilities}
-      />
-      <Button onClick={handleCharacterSave}>Submit character</Button>
-    </Section>
+    <>
+      {(storedCharacter === null || storedCharacter === {} || storedCharacter === undefined)
+        ?
+          (
+            <Section>
+              <CharForm
+                handleBasic={handleBasic}
+                handleStats={handleStats}
+                handleAbilities={handleAbilities}
+                submitBasic={submitBasic}
+                submitStats={submitStats}
+                submitAbilities={submitAbilities}
+              />
+              <Button onClick={handleCharacterSave}>Submit character</Button>
+            </Section>
+          )
+        : <CharSheet {...storedCharacter} />
+      }
+    </>
   )
 }
 

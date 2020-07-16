@@ -225,13 +225,15 @@ class Nav extends React.Component {
               color={"#5a0d0d"}
             />
             <SubMenu>
-              <SubMenuItem
-                angle={90}
-                active={activeCategory === "char" ? true : false}
-                img={Character}
-                hoverImg={CharacterWhite}
-                title="Character"
-              />
+              <Link href="../character">
+                <SubMenuItem
+                  angle={90}
+                  active={activeCategory === "char" ? true : false}
+                  img={Character}
+                  hoverImg={CharacterWhite}
+                  title="Character"
+                />
+              </Link>
               <SubMenuItem
                 angle={135}
                 active={activeCategory === "char" ? true : false}

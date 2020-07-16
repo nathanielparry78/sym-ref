@@ -89,6 +89,8 @@ const CharForm = ({
 
       <form onChange={handleStats}>
         {/* Attributes */}
+
+        {console.log("add modifiers")}
         <InputBlock label="Accurate" placeholder="5" type="number"/>
         <InputBlock label="Cunning" placeholder="5" type="number"/>
         <InputBlock label="Discreet" placeholder="5" type="number"/>
@@ -101,6 +103,9 @@ const CharForm = ({
         <Simple/>
 
         {/* Derived Attributes */}
+
+        {console.log("add max/current")}
+
         <InputBlock label="Toughness" placeholder="10" type="number"/>
         <InputBlock label="Corr. Thresh." placeholder="10" type="number"/>
         <InputBlock label="Composure" placeholder="10" type="number"/>
