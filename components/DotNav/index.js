@@ -1,10 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import Link from 'next/Link'
 
 import CharIcon from "./icons/char-icon-black.png";
 import CharIconWhite from "./icons/char-icon-white.png";
-import MonIcon from "./icons/monster-icon-black.png";
-import MonIconWhite from "./icons/monster-icon-white.png";
+import Character from "./icons/character-black.png";
+import CharacterWhite from "./icons/character-white.png";
+import Notes from "./icons/book-black.png";
+import NotesWhite from "./icons/book-white.png";
+import Contacts from "./icons/contacts-black.png";
+import ContactsWhite from "./icons/contacts-white.png";
 import Backpack from "./icons/backpack.png";
 import BackpackWhite from "./icons/backpack-white.png";
 import Coins from "./icons/coins.png";
@@ -15,6 +20,14 @@ import Spell from "./icons/magic-swirl.png";
 import SpellWhite from "./icons/magic-swirl-white.png";
 import Code from "./icons/code.png";
 import CodeWhite from "./icons/code-white.png";
+import Feats from "./icons/feats-black.png";
+import FeatsWhite from "./icons/feats-white.png";
+import Maneuvers from "./icons/maneuvers-black.png";
+import ManeuversWhite from "./icons/maneuvers-white.png";
+import Crits from "./icons/crits-black.png";
+import CritsWhite from "./icons/crits-white.png";
+import Abilities from "./icons/abilities-black.png";
+import AbilitiesWhite from "./icons/abilities-white.png";
 
 const NavContainer = styled.div`
   display: flex;
@@ -99,11 +112,11 @@ const MenuItem = styled.div`
   }
 
   ${({ active }) => (active ? `transform: scale(1.5); opacity: .8;` : null)};
-  ${({ activeCategory, baseState }) =>
+  ${({ activeCategory, color }) =>
     activeCategory && activeCategory !== ""
-      ? `background-color: maroon; transform: scale(2.5);`
+      ? `background-color: ${color}; transform: scale(2.5);`
       : null};
-  ${({ img }) => (img ? `background-image: url(${img})` : null)};
+  ${({ img }) => (img && `background-image: url(${img})`)};
 `;
 
 const SubMenu = styled.div`
@@ -117,7 +130,7 @@ const SubMenu = styled.div`
   z-index: 20;
 `;
 
-const SubMenuItem = styled.span`
+const SubMenuItem = styled.a`
     width: 30px;
     height: 30px;
     object-fit: cover;
@@ -127,9 +140,9 @@ const SubMenuItem = styled.span`
     position: absolute;
     border-radius: 50%;
     border: 1px solid #888;
-    background-color: white;
+    background-color: var(--white);
     opacity: 0;
-    transition: transform .2s, opacity .2s, width .2s, height .2s, background-size .2s;
+    transition: transform .2s, opacity .2s;
     background-size: 35px;
     background-position: center;
 
@@ -139,9 +152,8 @@ const SubMenuItem = styled.span`
         : null};
 
     &:hover {
-        width: 40px;
         height: 40px;
-        transition: width .2s, height .2s;
+        width: 40px;
         background: #333;
 
         ${({ hoverImg }) =>
@@ -150,33 +162,13 @@ const SubMenuItem = styled.span`
                 background-repeat: no-repeat;
                 background-size: 40px;
                 background-position: center;
-                transition: background-size: .2s;`
+              `
             : null}
 };
 
 ${({ angle, active }) =>
-  active && angle === 45
-    ? `transform: rotate(-45deg) translate(5.5em) rotate(45deg); opacity: 0.8;`
-    : null}
-
-${({ angle, active }) =>
-  active && angle === 90
-    ? `transform: rotate(-90deg) translate(5.5em) rotate(90deg); opacity: 0.8;`
-    : null}
-
-${({ angle, active }) =>
-  active && angle === 135
-    ? `transform: rotate(-135deg) translate(5.5em) rotate(135deg); opacity: 0.8;`
-    : null}
-
-${({ angle, active }) =>
-  active && angle === 180
-    ? `transform: rotate(-180deg) translate(5.5em) rotate(180deg); opacity: 0.8;`
-    : null}
-
-${({ angle, active }) =>
-  active && angle === 225
-    ? `transform: rotate(-225deg) translate(5.5em) rotate(225deg); opacity: 0.8;`
+  active && angle
+    ? `transform: rotate(-${angle}deg) translate(5.5em) rotate(${angle}deg); opacity: 0.8;`
     : null}
 `;
 
@@ -229,23 +221,15 @@ class Nav extends React.Component {
               activeCategory={activeCategory === "char"}
               onClick={() => this.handleNav("char")}
               baseState={baseState}
+              color={"#5a0d0d"}
             />
             <SubMenu>
               <SubMenuItem
-                angle={45}
-                active={activeCategory === "char" ? true : false}
-                onClick={() => this.props.handlePageStatus("charCon")}
-                img={Code}
-                hoverImg={CodeWhite}
-                title="Converter"
-              />
-              <SubMenuItem
                 angle={90}
                 active={activeCategory === "char" ? true : false}
-                img={Book}
-                hoverImg={BookWhite}
-                title="Stats"
-                onClick={() => this.props.handlePageStatus("char")}
+                img={Character}
+                hoverImg={CharacterWhite}
+                title="Character"
               />
               <SubMenuItem
                 angle={135}
@@ -257,28 +241,73 @@ class Nav extends React.Component {
               <SubMenuItem
                 angle={180}
                 active={activeCategory === "char" ? true : false}
-                img={Coins}
-                hoverImg={CoinsWhite}
-                title="Currency"
+                img={Contacts}
+                hoverImg={ContactsWhite}
+                title="Contacts"
               />
               <SubMenuItem
                 angle={225}
                 active={activeCategory === "char" ? true : false}
-                img={Spell}
-                hoverImg={SpellWhite}
-                title="Spells"
+                onClick={() => this.props.handlePageStatus("charCon")}
+                img={Notes}
+                hoverImg={NotesWhite}
+                title="Notes"
               />
+
             </SubMenu>
           </MenuBlock>
           <MenuBlock>
             <MenuItem
-              img={activeCategory === "mon" ? MonIconWhite : MonIcon}
+              img={activeCategory === "ref" ? BookWhite : Book}
               active={active}
-              activeCategory={activeCategory === "mon"}
-              onClick={() => this.props.handlePageStatus("mon")}
+              activeCategory={activeCategory === "ref"}
+              onClick={() => this.handleNav("ref")}
               right
               baseState={baseState}
+              color={"#112e4c"}
             />
+            <SubMenu>
+              <Link href="../crits">
+                <SubMenuItem
+                  angle={330}
+                  active={activeCategory === "ref" ? true : false}
+                  img={Crits}
+                  hoverImg={CritsWhite}
+                  title="Crits"
+                  onClick={this.toggleNav}
+                />
+              </Link>
+              <Link href="../feats">
+                <SubMenuItem
+                  angle={15}
+                  active={activeCategory === "ref" ? true : false}
+                  img={Feats}
+                  hoverImg={FeatsWhite}
+                  title="Feats"
+                  onClick={this.toggleNav}
+                />
+              </Link>
+              <Link href="../maneuvers">
+                <SubMenuItem
+                  angle={60}
+                  active={activeCategory === "ref" ? true : false}
+                  img={Maneuvers}
+                  hoverImg={ManeuversWhite}
+                  title="Maneuvers"
+                  onClick={this.toggleNav}
+                />
+              </Link>
+              <Link href="../abilities">
+                <SubMenuItem
+                  angle={105}
+                  active={activeCategory === "ref" ? true : false}
+                  img={Abilities}
+                  hoverImg={AbilitiesWhite}
+                  title="Abilities"
+                  onClick={this.toggleNav}
+                />
+              </Link>
+            </SubMenu>
           </MenuBlock>
         </Items>
       </NavContainer>

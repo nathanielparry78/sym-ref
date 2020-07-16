@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Nav from '../components/nav'
+import Nav from '../components/DotNav'
 import { Component } from 'react'
 import '../public/global-styles.css'
 
@@ -13,8 +13,8 @@ function App({ Component, pageProps }) {
 
       </Head>
 
-      <Nav />
       <Component {...pageProps} />
+      <Nav />
     </>
   )
 }

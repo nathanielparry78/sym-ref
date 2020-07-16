@@ -12,15 +12,26 @@ const Section = styled.section`
   border-radius: 15px;
   margin-bottom: .5rem;
   box-shadow: var(--shadowDark);
+  position: relative;
 `
 
 const Header = styled.div`
   margin-top: -0.5rem;
-  border-bottom: 2px solid black;
+
   display: grid;
   grid-template-areas:
     "name occupation"
     "name xp";
+
+    &:after {
+      position: absolute;
+      content: "";
+      height: 2px;
+      right: 2rem;
+      bottom: 18px;
+      border-bottom: 2px solid black;
+      width: calc(100% - (45px + 4.5rem));
+    }
 `
 
 const Image = styled.img`
@@ -69,14 +80,23 @@ const StyledTracker = styled(StatTracker)`
   outline: 1px solid #222;
 `
 
+const StatsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+`
+
 const Stats = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  flex-wrap: wrap;
 `
+
 const AbilityBlock = styled(Section)`
 `
+
 const Weapons = styled.div``
 const Armor = styled.div``
 const Misc = styled.div``
@@ -121,11 +141,18 @@ const CharSheet = ({
           <StyledTracker stat="Composure" currentValue={composure && composure.current} maxValue={composure && composure.max}/>
         </Trackers>
         <BottomLine />
-        <Stats>
-          {(stats || []).map(stat => (
-            <StatBlock {...stat} key={stat.name} />
-          ))}
-        </Stats>
+        <StatsWrapper>
+          <Stats>
+            {(stats.slice(0, 4) || []).map(stat => (
+              <StatBlock {...stat} key={stat.name} />
+            ))}
+          </Stats>
+          <Stats>
+            {(stats.slice(4, 9) || []).map(stat => (
+              <StatBlock {...stat} key={stat.name} />
+            ))}
+          </Stats>
+        </StatsWrapper>
       </Section>
       {abilities &&
         <AbilityBlock>
