@@ -93,7 +93,7 @@ const DoubleBlock = ({handleChange, label, placeholder, type = "text", min = "5"
   <Double><span>{label}</span>
     <Input
       onChange={handleChange}
-      name={`${createName(label)}Current`}
+      name={`${createName(label)}-current`}
       type={type}
       min={min}
       max={max}
@@ -102,7 +102,7 @@ const DoubleBlock = ({handleChange, label, placeholder, type = "text", min = "5"
     />
     <Input
       onChange={handleChange}
-      name={`${createName(label)}Max`}
+      name={`${createName(label)}-max`}
       type={type}
       min={min}
       max={max}
@@ -156,8 +156,8 @@ const CharForm = ({
 
         {/* Derived Attributes */}
         <DoubleBlock label="Toughness" placeholder="10" type="number"/>
-        <DoubleBlock label="Corruption" placeholder="10" type="number"/>
         <DoubleBlock label="Composure" placeholder="10" type="number"/>
+        <DoubleBlock label="Corruption" placeholder="10" type="number"/>
         <ButtonWrapper onClick={submitStats}>Save Stats</ButtonWrapper>
 
       </form>
