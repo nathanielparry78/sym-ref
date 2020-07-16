@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Link from 'next/Link'
+import Link from 'next/link'
 
 import CharIcon from "./icons/char-icon-black.png";
 import CharIconWhite from "./icons/char-icon-white.png";
