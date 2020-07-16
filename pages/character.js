@@ -47,6 +47,11 @@ const Character = () => {
         value: e.target.value
       }
 
+      // if toughness, corruption, composure
+      // add current/max.
+
+      // update storage on tracker modification
+
       const isPresent = stats.findIndex(item => item.name === e.target.name)
 
       if (isPresent > -1) {

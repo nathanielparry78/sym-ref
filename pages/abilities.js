@@ -72,7 +72,11 @@ const Abilities = ({className}) => {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    setCollection(JSON.parse(window.localStorage.getItem('abilityCollection')))
+    const abilityCollection = window.localStorage.getItem('abilityCollection')
+
+    if (abilityCollection) {
+      setCollection(JSON.parse(window.localStorage.getItem('abilityCollection')))
+    }
   }, [])
 
   const handleInputChange = (e) => {
