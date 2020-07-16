@@ -5,7 +5,7 @@ import Button from '../components/button';
 
 const Label = styled.label`
   display: grid;
-  grid-template-columns: 1fr 175px minmax(175px, 300px) 1fr;
+  grid-template-columns: 1fr minmax(130px, 175px) minmax(175px, 300px) 1fr;
   grid-template-areas: ". label input .";
   font-size: 1.5rem;
   text-align: right;
@@ -28,10 +28,33 @@ const FieldStyles = `
 
 const Input = styled.input`
   ${FieldStyles}
+
+  ${({gridArea}) => gridArea && `grid-area: ${gridArea}`}
 `
 
 const TextArea = styled.textarea`
   ${FieldStyles}
+`
+
+const Double = styled.label`
+  display: grid;
+  grid-template-columns: 1fr minmax(130px, 175px) 98px 98px 1fr;
+  grid-template-areas: ". label input1 input2 .";
+  font-size: 1.5rem;
+  text-align: right;
+  font-family: var(--fancy);
+
+  & span {
+    grid-area: label;
+  }
+`
+
+const Wrapper = styled.div`
+  width: calc(100% - 1rem);
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
 `
 
 const createName = (string) => {
@@ -40,6 +63,12 @@ const createName = (string) => {
 
   return test + name;
 }
+
+const ButtonWrapper = ({onClick, children}) => (
+  <Wrapper>
+    <Button onClick={onClick}>{children}</Button>
+  </Wrapper>
+)
 
 const TextField = ({label, placeholder, type = "text", onChange}) => (
   <Label><span>{label}</span>
@@ -60,6 +89,29 @@ const InputBlock = ({handleChange, label, placeholder, type = "text", min = "5",
   </Label>
 )
 
+const DoubleBlock = ({handleChange, label, placeholder, type = "text", min = "5", max = "20"}) => (
+  <Double><span>{label}</span>
+    <Input
+      onChange={handleChange}
+      name={`${createName(label)}Current`}
+      type={type}
+      min={min}
+      max={max}
+      placeholder="Current"
+      gridArea={"input1"}
+    />
+    <Input
+      onChange={handleChange}
+      name={`${createName(label)}Max`}
+      type={type}
+      min={min}
+      max={max}
+      placeholder="Max"
+      gridArea={"input2"}
+    />
+  </Double>
+
+)
 
 const CharForm = ({
   handleBasic,
@@ -82,7 +134,7 @@ const CharForm = ({
 
         <InputBlock label="Total XP" placeholder="Total XP" type="number" max="100"/>
         <InputBlock label="Unspent XP" placeholder="Unspent XP" type="number" max="100" />
-        <Button onClick={submitBasic}>Save Basic Info</Button>
+        <ButtonWrapper onClick={submitBasic}>Save Basic Info</ButtonWrapper>
       </form>
 
       <Flourish />
@@ -103,13 +155,10 @@ const CharForm = ({
         <Simple/>
 
         {/* Derived Attributes */}
-
-        {console.log("add max/current")}
-
-        <InputBlock label="Toughness" placeholder="10" type="number"/>
-        <InputBlock label="Corr. Thresh." placeholder="10" type="number"/>
-        <InputBlock label="Composure" placeholder="10" type="number"/>
-        <Button onClick={submitStats}>Save Stats</Button>
+        <DoubleBlock label="Toughness" placeholder="10" type="number"/>
+        <DoubleBlock label="Corruption" placeholder="10" type="number"/>
+        <DoubleBlock label="Composure" placeholder="10" type="number"/>
+        <ButtonWrapper onClick={submitStats}>Save Stats</ButtonWrapper>
 
       </form>
 
@@ -121,7 +170,7 @@ const CharForm = ({
 
         {/* Traits */}
         <TextField label="Traits" placeholder="Traits"/>
-        <Button onClick={submitAbilities}>Save Abilities</Button>
+        <ButtonWrapper onClick={submitAbilities}>Save Abilities</ButtonWrapper>
 
       </form>
     </>
