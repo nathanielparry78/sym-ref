@@ -71,6 +71,9 @@ const Abilities = ({className}) => {
 
   const inputRef = useRef(null);
 
+  useEffect(() => {
+    setCollection(JSON.parse(window.localStorage.getItem('abilityCollection')))
+  }, [])
 
   const handleInputChange = (e) => {
     if (e.target.value.length > 1) {
@@ -91,14 +94,17 @@ const Abilities = ({className}) => {
 
 
   const handleSuggestClick = (item) => {
-    setCollection([item, ...collection]);
+    const newCollection = [item, ...collection]
+    setCollection(newCollection);
     setQuery("");
     inputRef.current.value = "";
+    window.localStorage.setItem("abilityCollection", JSON.stringify(newCollection))
   };
 
   const handleRemove = (id) => {
-    const newCollection = collection.filter( item => item.id !== id)
-    setCollection(newCollection)
+    const newCollection = collection.filter( item => item.id !== id);
+    setCollection(newCollection);
+    window.localStorage.setItem("abilityCollection", JSON.stringify(newCollection))
   };
 
   return (

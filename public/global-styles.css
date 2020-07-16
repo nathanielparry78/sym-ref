@@ -7,6 +7,10 @@
   --shadow: 0px 4px 6px 2px #212121;
   --shadowDark: 0px 4px 6px 2px #000;
   --shadowBrown: 0px 3px 6px var(--brown);
+
+  --fancy: 'IM Fell Great Primer SC';
+  --sans: 'News Cycle', sans-serif;
+
 }
 
 body {

@@ -2,6 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import Link from 'next/link'
 
+// import Spell from "./icons/magic-swirl.png";
+// import SpellWhite from "./icons/magic-swirl-white.png";
+// import Code from "./icons/code.png";
+// import CodeWhite from "./icons/code-white.png";
+// import Coins from "./icons/coins.png";
+// import CoinsWhite from "./icons/coins-white.png";
+
 import CharIcon from "./icons/char-icon-black.png";
 import CharIconWhite from "./icons/char-icon-white.png";
 import Character from "./icons/character-black.png";
@@ -12,14 +19,8 @@ import Contacts from "./icons/contacts-black.png";
 import ContactsWhite from "./icons/contacts-white.png";
 import Backpack from "./icons/backpack.png";
 import BackpackWhite from "./icons/backpack-white.png";
-import Coins from "./icons/coins.png";
-import CoinsWhite from "./icons/coins-white.png";
 import Book from "./icons/book-cover.png";
 import BookWhite from "./icons/book-cover-white.png";
-import Spell from "./icons/magic-swirl.png";
-import SpellWhite from "./icons/magic-swirl-white.png";
-import Code from "./icons/code.png";
-import CodeWhite from "./icons/code-white.png";
 import Feats from "./icons/feats-black.png";
 import FeatsWhite from "./icons/feats-white.png";
 import Maneuvers from "./icons/maneuvers-black.png";
@@ -248,7 +249,6 @@ class Nav extends React.Component {
               <SubMenuItem
                 angle={225}
                 active={activeCategory === "char" ? true : false}
-                onClick={() => this.props.handlePageStatus("charCon")}
                 img={Notes}
                 hoverImg={NotesWhite}
                 title="Notes"
