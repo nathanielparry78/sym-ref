@@ -143,12 +143,12 @@ const CharSheet = ({
         <BottomLine />
         <StatsWrapper>
           <Stats>
-            {(stats.slice(0, 4) || []).map(stat => (
+            {(stats && stats.slice(0, 4) || []).map(stat => (
               <StatBlock {...stat} key={stat.name} />
             ))}
           </Stats>
           <Stats>
-            {(stats.slice(4, 9) || []).map(stat => (
+            {(stats && stats.slice(4, 9) || []).map(stat => (
               <StatBlock {...stat} key={stat.name} />
             ))}
           </Stats>
