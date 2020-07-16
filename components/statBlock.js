@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import frame from "../public/frame.png";
-import svgFrame from "../public/frame.svg";
+import pngFrame from "../public/frame-fill.png";
 
 const Block = styled.div`
 	font-family: 'IM Fell Great Primer SC';
-  background: url(${svgFrame}) no-repeat;
+  background: url(${pngFrame}) no-repeat;
   height: 140px;
   width: 90px;
   min-width: 90px;
@@ -16,7 +16,7 @@ const Block = styled.div`
 const Stat = styled.div`
   text-transform: uppercase;
   font-size: 10px;
-  background: #222;
+  background: var(--brown, #222);
   padding: .25rem 0;
   color: white;
   margin: 0 8px;

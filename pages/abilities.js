@@ -1,6 +1,6 @@
-import {useState, useEffect, useRef} from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import {Ability} from '../components/ability';
+import { Ability } from '../components/ability';
 import flatAbilities from '../public/symbaroum-data-flat.json';
 import background from "../public/parchment-30.jpg";
 
@@ -40,16 +40,16 @@ const SuggestItem = styled.li`
   user-select: none;
 
   &:hover {
-    outline: 1px solid #067df7;
+    outline: 1px solid var(--blue);
   }
 `
 
 const AbilityBlock = styled.div`
   background: url(${background});
-  padding: .5em 1em 1.25em ;
+  padding: 1.25em 1.5em 1.25em ;
   position: relative;
   border-radius: 5px;
-  box-shadow: 0px 4px 6px 2px #212121;
+  box-shadow: var(--shadow);
   z-index: 5;
   width: 80vw;
   margin: 1rem auto;
@@ -57,9 +57,9 @@ const AbilityBlock = styled.div`
 
 const GarbageCan = styled.span`
   position: absolute;
-  top: .75rem;
-  right: 1rem;
-  color: red;
+  top: 2.5rem;
+  right: 1.5rem;
+  color: maroon;
   font-size: .75em;
   cursor: pointer;
 `

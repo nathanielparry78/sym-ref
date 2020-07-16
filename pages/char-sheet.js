@@ -2,16 +2,34 @@ import styled from 'styled-components';
 import StatTracker from '../components/statTracker';
 import StatBlock from '../components/statBlock';
 import {ParsedAbilities} from '../components/parsedAbilities';
+import { Simple, Flourish, BottomLine } from '../components/dividers';
 
-import divider1 from "../public/divider.png";
-import divider2 from "../public/bottom-line.png";
-import divider3 from "../public/simple1.png";
+import background from '../public/parchment-30.jpg'
+
+const Section = styled.section`
+  background: url(${background});
+  padding: 2rem 2rem 1rem;
+  border-radius: 15px;
+  margin-bottom: .5rem;
+  box-shadow: var(--shadowDark);
+`
 
 const Header = styled.div`
+  margin-top: -0.5rem;
+  border-bottom: 2px solid black;
   display: grid;
   grid-template-areas:
     "name occupation"
     "name xp";
+`
+
+const Image = styled.img`
+  height: 44px;
+  width: 44px;
+  margin-right: .5rem;
+  background: #555;
+  display: inline-flex;
+  outline: 1px solid var(--brown);
 `
 
 const Name = styled.div`
@@ -20,6 +38,7 @@ const Name = styled.div`
   grid-area: name;
   display: flex;
   align-items: flex-end;
+  color: var(--brown);
 `
 
 const Occupation = styled.div`
@@ -39,40 +58,15 @@ const Heading = styled.div`
 	font-family: 'IM Fell Great Primer SC';
   text-align: center;
 `
+
 const Trackers = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-column-gap: 3vw;
-  margin-bottom: 1rem;
-  border-top: 3px solid #222;
-  padding-top: 1rem;
 `
 
 const StyledTracker = styled(StatTracker)`
   outline: 1px solid #222;
-`
-
-const Divider = styled.div`
-  position: relative;
-  display: flex;
-  width: 100%;
-  justify-items: center;
-  border: red;
-  ${({type}) => type === "one" && `
-    background: url(${divider1}) no-repeat center;
-    height: 20px;
-    margin: 1rem 0;
-  `}
-  ${({type}) => type === "two" && `
-    background: url(${divider2}) no-repeat center;
-    height: 20px;
-    margin: 1rem 0;
-  `}
-  ${({type}) => type === "three" && `
-    background: url(${divider3}) no-repeat center;
-    height: 7px;
-    margin: .5rem 0;
-  `}
 `
 
 const Stats = styled.div`
@@ -81,8 +75,7 @@ const Stats = styled.div`
   justify-content: space-around;
   flex-wrap: wrap;
 `
-const AbilityBlock = styled.div`
-  margin-bottom: 2rem;
+const AbilityBlock = styled(Section)`
 `
 const Weapons = styled.div``
 const Armor = styled.div``
@@ -113,35 +106,41 @@ const CharSheet = ({
 
   return (
     <div>
-      <Header>
-        <Name>{name}</Name>
-        <Occupation>{occupation}</Occupation>
-        <XP> Unspent XP: {unspentXP} | Total XP: {totalXP} XP)</XP>
-      </Header>
+      <Section>
+        <Header>
+
+          <Name><Image/>{name}</Name>
+          <Occupation>{occupation}</Occupation>
+          <XP> Unspent XP: {unspentXP} | Total XP: {totalXP} XP)</XP>
+        </Header>
+      </Section>
+      <Section>
         <Trackers>
           <StyledTracker stat="Toughness" currentValue={toughness && toughness.current} maxValue={toughness && toughness.max}/>
           <StyledTracker stat="Corruption" currentValue={corruption && corruption.current} maxValue={corruption && corruption.max}/>
           <StyledTracker stat="Composure" currentValue={composure && composure.current} maxValue={composure && composure.max}/>
         </Trackers>
-      <Divider type="two"/>
-      <Stats>
-        {(stats || []).map(stat => (
-          <StatBlock {...stat} key={stat.name} />
-        ))}
-      </Stats>
-      <Divider type="two"/>
+        <BottomLine />
+        <Stats>
+          {(stats || []).map(stat => (
+            <StatBlock {...stat} key={stat.name} />
+          ))}
+        </Stats>
+      </Section>
       {abilities &&
         <AbilityBlock>
           <Heading>Abilities</Heading>
-          <Divider type="three"/>
+          <Simple />
           <ParsedAbilities items={abilities}/>
+          <Flourish />
         </AbilityBlock>
       }
       {traits &&
         <AbilityBlock>
           <Heading>Traits</Heading>
-          <Divider type="three"/>
+          <Simple />
           <ParsedAbilities items={traits}/>
+          <Flourish />
         </AbilityBlock>
       }
       <Weapons></Weapons>
@@ -149,7 +148,7 @@ const CharSheet = ({
       <Misc></Misc>
       <Contacts></Contacts>
       <Notes></Notes>
-      <Divider type="one" />
+      <Flourish />
     </div>
   )
 }

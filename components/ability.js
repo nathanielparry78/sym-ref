@@ -1,14 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const Card = styled.div`
+	position: relative;
+`
+
 const Name = styled.span`
 	font-family: 'IM Fell Great Primer SC', serif;
-	font-size: 1.5rem;
+	font-size: 2rem;
+	color: var(--brown);
 
 	&::after {
-		border-bottom: 1px solid #333;
-		width: 100vw;
+		content: "";
+		border-bottom: 3px solid var(--lightBrown);
+		width: 100%;
 		height: 1px;
+		top: 40px;
 		position: absolute;
 		display: block;
 	}
@@ -19,25 +26,41 @@ const Source = styled.span`
 	padding: 0 .5rem;
 `;
 
-const Effect = styled.div``;
+const Effect = styled.div`
+	margin-top: 1rem;
+`;
 
 const Requirement = styled.div`
 	font-style: italic;
 `;
 
 const TierBlock = styled.li`
+	position: relative;
 	list-style: none;
 	padding-left: 2rem;
-	border-bottom: 1px solid #666;
 	border-width: 90%;
 	padding-top: .5rem;
-	padding-bottom: .75rem;
+	padding-bottom: 1rem;
 
 	&::before {
 		margin: 0 .5rem 0 -1.5rem;
 		${({type}) => type === "novice" && "content:'･'; font-size: 1.4rem; line-height: 1; margin-left: -1.375rem; padding-right: .125rem;"}
 		${({type}) => type === "adept" && "content: '･･'; font-size: 1.4rem; letter-spacing: -3px; margin-left: -1.625rem;	line-height: 1;"}
 		${({type}) => type === "master" && "content: '𐬽';"}
+	}
+
+	&:after {
+		position: absolute;
+		content: "";
+		width: calc(100% - 2rem);
+		height: 1px;
+		bottom: 0;
+		background: #666;
+		left: 2rem;
+	}
+
+	&:last-of-type:after {
+		background: none;
 	}
 `;
 
@@ -58,7 +81,7 @@ export const Ability = ({
 	adept,
 	master,
 	tier=3}) => (
-	<div className={className}>
+	<Card className={className}>
 		<Name>{name}</Name>
 		<Source>{source}</Source>
 		{requirement &&
@@ -86,6 +109,5 @@ export const Ability = ({
 				<Text>{master.text}</Text>
 			</TierBlock>
 		}
-
-	</div>
+	</Card>
 );

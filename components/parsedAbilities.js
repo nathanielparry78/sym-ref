@@ -7,7 +7,7 @@ import dataFlat from '../public/symbaroum-data-flat.json';
 const AbilityBlock = styled.div`
 	padding-top: .5em;
 	padding-bottom: 1em;
-	border-bottom: 1px solid;
+	border-bottom: 1px solid var(--lightBrown);
 `
 
 export const ParsedAbilities = ({items = []}) => {

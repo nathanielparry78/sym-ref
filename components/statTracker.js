@@ -5,6 +5,7 @@ const Tracker = styled.div`
 	font-family: 'IM Fell Great Primer SC';
   display: flex;
   flex-direction: column;
+  background: var(--white);
 `
 
 const StatName = styled.div`
@@ -16,6 +17,7 @@ const StatName = styled.div`
 `;
 
 const CurrentBox = styled.div`
+  border-top: 1px solid #666;
   display: grid;
   grid-template-columns: 75% 25%;
   text-align: center;

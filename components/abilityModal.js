@@ -12,13 +12,14 @@ import monster from '../public/monster2.png'
 const Modal = styled.div`
 	display: absolute;
 	height: auto;
-	box-shadow: 0px 3px 6px #666;
+	box-shadow: var(--shadowBrown);
 	padding: .5rem 1rem 1rem;
 	margin-top: .5rem;
 	display: ${({isVisible}) => isVisible
 		? "block"
 		: "none"
 	};
+	background: var(--white);
 `;
 
 const Type = styled.div`
