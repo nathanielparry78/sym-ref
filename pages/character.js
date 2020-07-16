@@ -16,6 +16,12 @@ const Section = styled.section`
   position: relative;
 `
 
+const SubmitButton = styled(Button)`
+  margin: 2rem auto;
+  display: block;
+  position: relative;
+`
+
 const Character = () => {
   const [ character, setCharacter ] = useState({});
   const [ basics, setBasics ] = useState({});
@@ -42,17 +48,36 @@ const Character = () => {
     const update = [...stats];
 
     if (e.target.value > 0 && e.target.value < 18) {
-      const stat = {
-        name: e.target.name,
-        value: e.target.value
-      }
+      const { name, value } = e.target;
+      let stat = {}
+
+      const statName = name.includes('-')
+        ? name.split('-')[0]
+        : name
+
 
       // if toughness, corruption, composure
       // add current/max.
 
       // update storage on tracker modification
 
-      const isPresent = stats.findIndex(item => item.name === e.target.name)
+      const isPresent = stats.findIndex(item => item.name === statName)
+
+
+      if (name.includes('-')) {
+        stat = {
+          name: statName,
+          current: name.includes('cur') && value,
+          max: name.includes('max') && value,
+        }
+
+      } else {
+        stat = {
+          name: statName,
+          value: value
+        }
+      }
+
 
       if (isPresent > -1) {
         update[isPresent] = stat
@@ -98,8 +123,7 @@ const Character = () => {
     window.localStorage.setItem('character', JSON.stringify(character))
   }
 
-  console.log("SC", storedCharacter)
-
+  console.log(stats)
   return (
     <>
       {(storedCharacter === null || storedCharacter === {} || storedCharacter === undefined)
@@ -114,7 +138,8 @@ const Character = () => {
                 submitStats={submitStats}
                 submitAbilities={submitAbilities}
               />
-              <Button onClick={handleCharacterSave}>Submit character</Button>
+              <BottomLine />
+              <SubmitButton onClick={handleCharacterSave}>Submit character</SubmitButton>
             </Section>
           )
         : <CharSheet {...storedCharacter} />

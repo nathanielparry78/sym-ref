@@ -5,7 +5,7 @@ import Button from '../components/button';
 
 const Label = styled.label`
   display: grid;
-  grid-template-columns: 1fr minmax(130px, 175px) minmax(175px, 300px) 1fr;
+  grid-template-columns: 1fr minmax(80px, 175px) minmax(175px, 300px) 1fr;
   grid-template-areas: ". label input .";
   font-size: 1.5rem;
   text-align: right;
@@ -13,6 +13,10 @@ const Label = styled.label`
 
   & span {
     grid-area: label;
+  }
+
+  @media (max-width: 450px) {
+    font-size: 1rem;
   }
 `
 
@@ -38,7 +42,7 @@ const TextArea = styled.textarea`
 
 const Double = styled.label`
   display: grid;
-  grid-template-columns: 1fr minmax(130px, 175px) 98px 98px 1fr;
+  grid-template-columns: 1fr minmax(80px, 175px) minmax(88px, 88px) minmax(88px, 88px) 1fr;
   grid-template-areas: ". label input1 input2 .";
   font-size: 1.5rem;
   text-align: right;
@@ -47,14 +51,25 @@ const Double = styled.label`
   & span {
     grid-area: label;
   }
+
+  @media (max-width: 450px) {
+    font-size: 1rem;
+  }
 `
 
 const Wrapper = styled.div`
   width: calc(100% - 1rem);
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-areas: ". button .";
   justify-content: flex-end;
   padding: 1rem;
+
+  & span {
+    grid-area: button;
+    justify-self: inline-end;
+  }
 `
 
 const createName = (string) => {
@@ -64,9 +79,9 @@ const createName = (string) => {
   return test + name;
 }
 
-const ButtonWrapper = ({onClick, children}) => (
+const ButtonWrapper = ({onClick, children, color}) => (
   <Wrapper>
-    <Button onClick={onClick}>{children}</Button>
+    <Button onClick={onClick} color={color}>{children}</Button>
   </Wrapper>
 )
 
@@ -97,7 +112,7 @@ const DoubleBlock = ({handleChange, label, placeholder, type = "text", min = "5"
       type={type}
       min={min}
       max={max}
-      placeholder="Current"
+      placeholder="Cur."
       gridArea={"input1"}
     />
     <Input
@@ -134,7 +149,7 @@ const CharForm = ({
 
         <InputBlock label="Total XP" placeholder="Total XP" type="number" max="100"/>
         <InputBlock label="Unspent XP" placeholder="Unspent XP" type="number" max="100" />
-        <ButtonWrapper onClick={submitBasic}>Save Basic Info</ButtonWrapper>
+        <ButtonWrapper onClick={submitBasic} color={'var(--blue)'}>Save Basic Info</ButtonWrapper>
       </form>
 
       <Flourish />
@@ -158,7 +173,7 @@ const CharForm = ({
         <DoubleBlock label="Toughness" placeholder="10" type="number"/>
         <DoubleBlock label="Composure" placeholder="10" type="number"/>
         <DoubleBlock label="Corruption" placeholder="10" type="number"/>
-        <ButtonWrapper onClick={submitStats}>Save Stats</ButtonWrapper>
+        <ButtonWrapper onClick={submitStats} color={'var(--blue)'}>Save Stats</ButtonWrapper>
 
       </form>
 
@@ -170,7 +185,7 @@ const CharForm = ({
 
         {/* Traits */}
         <TextField label="Traits" placeholder="Traits"/>
-        <ButtonWrapper onClick={submitAbilities}>Save Abilities</ButtonWrapper>
+        <ButtonWrapper onClick={submitAbilities} color={'var(--blue)'}>Save Abilities</ButtonWrapper>
 
       </form>
     </>

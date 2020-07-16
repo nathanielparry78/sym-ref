@@ -3,18 +3,28 @@ import styled from 'styled-components';
 
 const Clicker = styled.span`
   cursor: pointer;
-  padding: .25rem .75rem;
-  background: maroon;
-  color: white;
+  padding: .5rem 1rem;
+  background-color: ${({color}) => color};
+  filter: saturate(40%);
+
+  color: var(--white);
   user-select: none;
+  text-align: center;
+  border-radius: 3px;
+
+  &:hover {
+    /* box-shadow: inset 0 0 2px 2px #000; */
+    filter: saturate(100%);
+    /* background-color: #666; */
+  }
 `
 
-const Button = ({children, onClick}) => {
+const Button = ({children, onClick, className, color = "maroon"}) => {
   const [ clicked, setClicked ] = useState(false);
   const [ verified, setVerified ] = useState(false)
 
   return (
-    <Clicker onClick={onClick}>
+    <Clicker onClick={onClick} className={className} color={color}>
       {children}
     </Clicker>
   )
