@@ -4,10 +4,11 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import cookie from 'js-cookie'
+// import initFirebase from '../utils/auth/initFirebase'
 import initFirebase from '../utils/auth/initFirebase'
 
 // Init the Firebase app.
-initFirebase()
+// initFirebase()
 
 const firebaseAuthConfig = {
   // signInFlow: 'popup',
@@ -48,7 +49,6 @@ const FirebaseAuth = () => {
     }
   }, [])
 
-  console.log(firebase)
   return (
     <div>
       {renderAuth ? (

@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Simple, Flourish } from '../components/dividers';
 import Button from '../components/button';
 
 const Label = styled.label`
   display: grid;
-  grid-template-columns: 1fr minmax(80px, 175px) minmax(175px, 300px) 1fr;
+  grid-template-columns: 1fr minmax(80px, 135px) minmax(175px, 300px) 1fr;
   grid-template-areas: ". label input .";
   font-size: 1.5rem;
   text-align: right;
@@ -42,7 +41,7 @@ const TextArea = styled.textarea`
 
 const Double = styled.label`
   display: grid;
-  grid-template-columns: 1fr minmax(80px, 175px) minmax(88px, 88px) minmax(88px, 88px) 1fr;
+  grid-template-columns: 1fr minmax(80px, 175px) minmax(88px, 98px) minmax(88px, 98px) 1fr;
   grid-template-areas: ". label input1 input2 .";
   font-size: 1.5rem;
   text-align: right;
@@ -57,26 +56,56 @@ const Double = styled.label`
   }
 `
 
+const FatFlourish = styled(Flourish)`
+  margin-bottom: 2rem;
+  position: relative;
+`
+
 const Wrapper = styled.div`
-  width: calc(100% - 1rem);
   position: relative;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   grid-template-areas: ". button .";
-  justify-content: flex-end;
   padding: 1rem;
 
   & span {
     grid-area: button;
-    justify-self: inline-end;
+    justify-self: center;
   }
 `
 
+const TextBlock = styled.div`
+  display: grid;
+  grid-template-columns: 1fr minmax(255px, 435px) 1fr;
+  grid-template-areas:
+    " . text . "
+    " . pre . ";
+  margin-bottom: 1rem;
+
+  & p {
+    grid-area: text;
+    margin-top: 0;
+    display: block;
+    position: relative;
+    line-height: 1.3;
+
+  }
+  & pre {
+    grid-area: pre;
+    white-space: normal;
+    background: #ffffff85;
+    padding: 1rem;
+    border-radius: 5px;
+  }
+`
+
+
+
 const createName = (string) => {
-  const test = string.slice(0, 1).toLowerCase();
+  const initial = string.slice(0, 1).toLowerCase();
   const name = string.slice(1).replace(/\s\./g, '')
 
-  return test + name;
+  return initial + name;
 }
 
 const ButtonWrapper = ({onClick, children, color}) => (
@@ -152,12 +181,10 @@ const CharForm = ({
         <ButtonWrapper onClick={submitBasic} color={'var(--blue)'}>Save Basic Info</ButtonWrapper>
       </form>
 
-      <Flourish />
+      <FatFlourish />
 
       <form onChange={handleStats}>
         {/* Attributes */}
-
-        {console.log("add modifiers")}
         <InputBlock label="Accurate" placeholder="5" type="number"/>
         <InputBlock label="Cunning" placeholder="5" type="number"/>
         <InputBlock label="Discreet" placeholder="5" type="number"/>
@@ -170,14 +197,22 @@ const CharForm = ({
         <Simple/>
 
         {/* Derived Attributes */}
-        <DoubleBlock label="Toughness" placeholder="10" type="number"/>
-        <DoubleBlock label="Composure" placeholder="10" type="number"/>
-        <DoubleBlock label="Corruption" placeholder="10" type="number"/>
+        <DoubleBlock label="Toughness" type="number"/>
+        <DoubleBlock label="Composure" type="number"/>
+        <DoubleBlock label="Corruption" type="number"/>
         <ButtonWrapper onClick={submitStats} color={'var(--blue)'}>Save Stats</ButtonWrapper>
 
       </form>
 
-      <Flourish />
+      <FatFlourish />
+      <TextBlock>
+        <p>
+          Abilities and Traits <em>must</em> be formatted in a particular way, or they will not be added to the character view. Add abilities, boons, burdens, powers, rituals, etc in a comma-separated list with the tier in parenthesis. <br/><br/>For example:
+        </p>
+        <pre>
+          Curse (III), Leader (novice), Ritualist (adept), Heretic's Trail (I), Exchange Shadow (I), Alternative Damage (II)
+        </pre>
+      </TextBlock>
 
       <form onChange={handleAbilities}>
         {/* Abilities */}

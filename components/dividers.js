@@ -27,10 +27,10 @@ const Divider = styled.div`
   `}
 `
 // three
-export const Simple = () => <Divider type={"simple"} />
+export const Simple = ({ className }) => <Divider type={"simple"} className={className}/>
 
 // two
-export const BottomLine = () => <Divider type={"bottomLine"} />
+export const BottomLine = ({ className }) => <Divider type={"bottomLine"} className={className}/>
 
 //one
-export const Flourish = () => <Divider type={"flourish"} />
+export const Flourish = ({ className }) => <Divider type={"flourish"} className={className}/>

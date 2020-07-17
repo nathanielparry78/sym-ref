@@ -19,3 +19,12 @@ body {
   padding: 1rem;
   background: #222;
 }
+
+a:link, a:visited {
+  text-decoration: none;
+  color: var(--blue);
+}
+
+ a:hover, a:active {
+   text-decoration: underline;
+ }

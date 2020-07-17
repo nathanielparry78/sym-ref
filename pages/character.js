@@ -7,6 +7,16 @@ import { Simple, Flourish, BottomLine } from '../components/dividers';
 
 import background from '../public/parchment-30.jpg'
 
+const debounce = (fn, time) => {
+	let timeout;
+
+	return function() {
+		const functionCall = () => fn.apply(this, arguments);
+		clearTimeout(timeout);
+		timeout = setTimeout(functionCall, time);
+	};
+};
+
 const Section = styled.section`
   background: url(${background});
   padding: 2rem 2rem 1rem;
@@ -18,6 +28,7 @@ const Section = styled.section`
 
 const SubmitButton = styled(Button)`
   margin: 2rem auto;
+  width: calc(100% - 2rem);
   display: block;
   position: relative;
 `
@@ -28,10 +39,10 @@ const Character = () => {
   const [ stats, setStats ] = useState([]);
   const [ abilities, setAbilities ] = useState({});
   const [ storedCharacter, setStoredCharacter ] = useState(null);
+  const [ submitted, setSumbitted ] = useState(false);
 
   useEffect(() => {
     const char = window.localStorage.getItem('character');
-    console.log(char)
 
     char && setStoredCharacter(JSON.parse(char))
   }, [])
@@ -47,44 +58,47 @@ const Character = () => {
   const handleStats = (e) => {
     const update = [...stats];
 
-    if (e.target.value > 0 && e.target.value < 18) {
+    if (e.target.value >= 0 && e.target.value < 20) {
       const { name, value } = e.target;
-      let stat = {}
 
       const statName = name.includes('-')
         ? name.split('-')[0]
         : name
 
+      const construct = (stat, value) => {
+        let newStat = {}
 
-      // if toughness, corruption, composure
-      // add current/max.
+        const getMod = (value) => (
+          value > 10
+            ? `-${value - 10}`
+            : `+${10 - value}`
+        )
 
-      // update storage on tracker modification
+        if (name.includes('-')) {
+          newStat = {
+            ...stat,
+            name: statName,
+            [name.includes('cur') ? "current" : "max"]: value,
+          }
+        } else {
+          newStat = {
+            name: statName,
+            value: value,
+            mod: getMod(value)
+          }
+        }
+
+        return newStat;
+      }
 
       const isPresent = stats.findIndex(item => item.name === statName)
 
-
-      if (name.includes('-')) {
-        stat = {
-          name: statName,
-          current: name.includes('cur') && value,
-          max: name.includes('max') && value,
-        }
-
-      } else {
-        stat = {
-          name: statName,
-          value: value
-        }
-      }
-
-
       if (isPresent > -1) {
-        update[isPresent] = stat
-        setStats(update)
+        update[isPresent] = construct(update[isPresent], value);
+        setStats(update);
       } else {
-        update.push(stat)
-        setStats(update)
+        update.push(construct());
+        setStats(update);
       }
     }
   }
@@ -120,13 +134,13 @@ const Character = () => {
     const string = character.name.replace(/\s/g, '')
     const name = `character-${string}`;
 
-    window.localStorage.setItem('character', JSON.stringify(character))
+    window.localStorage.setItem('character', JSON.stringify(character));
+    setSubmitted(true);
   }
 
-  console.log(stats)
   return (
     <>
-      {(storedCharacter === null || storedCharacter === {} || storedCharacter === undefined)
+      {(storedCharacter === null || storedCharacter === {} || storedCharacter === undefined) && !submitted
         ?
           (
             <Section>

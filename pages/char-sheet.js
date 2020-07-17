@@ -110,9 +110,6 @@ const CharSheet = ({
   totalXP,
   unspentXP,
   stats,
-  toughness = {},
-  corruption = {},
-  composure = {},
   abilities,
   traits,
   gear: {
@@ -123,6 +120,10 @@ const CharSheet = ({
   contacts,
   notes
 }) => {
+
+  const toughness = stats.filter(item => item.name === "toughness")[0];
+  const corruption = stats.filter(item => item.name === "corruption")[0];
+  const composure = stats.filter(item => item.name === "composure")[0];
 
   return (
     <div>
@@ -148,7 +149,7 @@ const CharSheet = ({
             ))}
           </Stats>
           <Stats>
-            {(stats && stats.slice(4, 9) || []).map(stat => (
+            {(stats && stats.slice(4, 8) || []).map(stat => (
               <StatBlock {...stat} key={stat.name} />
             ))}
           </Stats>

@@ -1,10 +1,9 @@
 import React from 'react';
-import {boons, burdens} from '../public/symbaroum-data.json';
+import { boons, burdens } from '../public/symbaroum-data.json';
 import styled from 'styled-components';
 
 const H1 = styled.h1`
- @import url('https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer+SC&display=swap');
-	font-family: 'IM Fell Great Primer SC', serif;
+	font-family: var(--fancy);
 	margin-bottom: 0;
 	padding: 0;
 	font-size: 24px;

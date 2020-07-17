@@ -61,8 +61,6 @@ export const Stats = ({data}) => {
 			statList.push({"stat": statName, "value": statValue, "mod": statMod});
 		})
 
-		console.log(statList)
-
 		return setStats(statList)
 	}, [])
 

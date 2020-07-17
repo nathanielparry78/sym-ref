@@ -29,6 +29,8 @@ import Crits from "./icons/crits-black.png";
 import CritsWhite from "./icons/crits-white.png";
 import Abilities from "./icons/abilities-black.png";
 import AbilitiesWhite from "./icons/abilities-white.png";
+import Delete from "./icons/delete-black.png";
+import DeleteWhite from "./icons/delete-white.png";
 
 const NavContainer = styled.div`
   display: flex;
@@ -153,6 +155,7 @@ const SubMenuItem = styled.a`
         : null};
 
     &:hover {
+
         height: 40px;
         width: 40px;
         background: #333;
@@ -165,12 +168,13 @@ const SubMenuItem = styled.a`
                 background-position: center;
               `
             : null}
-};
+    };
 
-${({ angle, active }) =>
-  active && angle
-    ? `transform: rotate(-${angle}deg) translate(5.5em) rotate(${angle}deg); opacity: 0.8;`
-    : null}
+      ${({ angle, active }) =>
+        active && angle
+          ? `transform: rotate(-${angle}deg) translate(5.5em) rotate(${angle}deg); opacity: 0.8;`
+          : null
+      }
 `;
 
 class Nav extends React.Component {
@@ -227,34 +231,48 @@ class Nav extends React.Component {
             <SubMenu>
               <Link href="../character">
                 <SubMenuItem
-                  angle={90}
+                  angle={45}
                   active={activeCategory === "char" ? true : false}
                   img={Character}
                   hoverImg={CharacterWhite}
                   title="Character"
+                  onClick={this.toggleNav}
                 />
               </Link>
               <SubMenuItem
-                angle={135}
+                angle={90}
                 active={activeCategory === "char" ? true : false}
                 img={Backpack}
                 hoverImg={BackpackWhite}
                 title="Equipment"
+                disabled
               />
               <SubMenuItem
-                angle={180}
+                angle={135}
                 active={activeCategory === "char" ? true : false}
                 img={Contacts}
                 hoverImg={ContactsWhite}
                 title="Contacts"
+                disabled
               />
               <SubMenuItem
-                angle={225}
+                angle={180}
                 active={activeCategory === "char" ? true : false}
                 img={Notes}
                 hoverImg={NotesWhite}
                 title="Notes"
+                disabled
               />
+              <Link href="../character-portal">
+                <SubMenuItem
+                  angle={225}
+                  active={activeCategory === "char" ? true : false}
+                  img={Delete}
+                  hoverImg={DeleteWhite}
+                  title="Delete"
+                  onClick={this.toggleNav}
+                />
+              </Link>
 
             </SubMenu>
           </MenuBlock>

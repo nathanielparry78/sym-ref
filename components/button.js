@@ -11,11 +11,10 @@ const Clicker = styled.span`
   user-select: none;
   text-align: center;
   border-radius: 3px;
+  width: 100%;
 
   &:hover {
-    /* box-shadow: inset 0 0 2px 2px #000; */
     filter: saturate(100%);
-    /* background-color: #666; */
   }
 `
 
