@@ -121,9 +121,9 @@ const CharSheet = ({
   notes
 }) => {
 
-  const toughness = stats.filter(item => item.name === "toughness")[0];
-  const corruption = stats.filter(item => item.name === "corruption")[0];
-  const composure = stats.filter(item => item.name === "composure")[0];
+  const toughness = (stats || []).filter(item => item.name === "toughness")[0];
+  const corruption = (stats || []).filter(item => item.name === "corruption")[0];
+  const composure = (stats || []).filter(item => item.name === "composure")[0];
 
   return (
     <div>
