@@ -31,13 +31,22 @@ const SubmitButton = styled(Button)`
   width: calc(100% - 2rem);
   display: block;
   position: relative;
+  font-size: 1.25rem;
+  padding: .75rem;
 `
 
 const Character = () => {
   const [ character, setCharacter ] = useState({});
+
   const [ basics, setBasics ] = useState({});
+  const [ basicsVerified, setBasicsVerified] = useState(false);
+
   const [ stats, setStats ] = useState([]);
+  const [ statsVerified, setStatsVerified] = useState(false);
+
   const [ abilities, setAbilities ] = useState({});
+  const [ abilitiesVerified, setAbilitiesVerified] = useState(false);
+
   const [ storedCharacter, setStoredCharacter ] = useState(null);
   const [ submitted, setSumbitted ] = useState(false);
 
@@ -87,11 +96,10 @@ const Character = () => {
             mod: getMod(value)
           }
         }
-
         return newStat;
       }
 
-      const isPresent = stats.findIndex(item => item.name === statName)
+      const isPresent = stats.findIndex(item => item.name === statName);
 
       if (isPresent > -1) {
         update[isPresent] = construct(update[isPresent], value);
@@ -110,24 +118,67 @@ const Character = () => {
     })
   }
 
-  const submitBasic = () => {
+  // SUBMIT FUNCTIONS
+
+  useEffect(() => {
     setCharacter({
       ...basics,
       ...character
     })
-  }
+  }, [basicsVerified])
 
-  const submitStats = () => {
+  useEffect(() => {
     setCharacter({
       stats,
       ...character
     })
-  }
-  const submitAbilities = () => {
+  }, [statsVerified])
+
+  useEffect(() => {
     setCharacter({
       ...abilities,
       ...character
     })
+  }, [abilitiesVerified])
+
+  const submitBasic = () => {
+    const { name, race, occupation, totalXP, unspentXP } = basics;
+
+    if ( name !== ""
+      && race !== ""
+      && occupation !== ""
+      && totalXP !== ""
+      && unspentXP !== ""
+      ) {
+      setBasicsVerified(true)
+    } else {
+      console.log("Basic error")
+    }
+  }
+
+  const submitStats = () => {
+    const verified = stats.some(item => {
+      item.name === "" && item.value === ""
+    })
+
+    console.log(stats)
+
+    console.log(verified)
+
+    if (verified) {
+      setStatsVerified(true)
+
+    } else {
+      console.log("Stats error")
+    }
+  }
+
+  const submitAbilities = () => {
+    if (abilities !== "") {
+      setAbilitiesVerified(true)
+    } else {
+      console.log("Abilities error")
+    }
   }
 
   const handleCharacterSave = () => {
@@ -138,6 +189,8 @@ const Character = () => {
     setSubmitted(true);
   }
 
+  console.log(basicsVerified, statsVerified, abilitiesVerified)
+
   return (
     <>
       {(storedCharacter === null || storedCharacter === {} || storedCharacter === undefined) && !submitted
@@ -146,11 +199,16 @@ const Character = () => {
             <Section>
               <CharForm
                 handleBasic={handleBasic}
-                handleStats={handleStats}
-                handleAbilities={handleAbilities}
                 submitBasic={submitBasic}
+                basicsVerified={basicsVerified}
+
+                handleStats={handleStats}
                 submitStats={submitStats}
+                statsVerified={statsVerified}
+
+                handleAbilities={handleAbilities}
                 submitAbilities={submitAbilities}
+                abilitiesVerified={abilitiesVerified}
               />
               <BottomLine />
               <SubmitButton onClick={handleCharacterSave}>Submit character</SubmitButton>

@@ -96,10 +96,10 @@ const TextBlock = styled.div`
     background: #ffffff85;
     padding: 1rem;
     border-radius: 5px;
+    font-size: 13px;
+    margin-top: 0;
   }
 `
-
-
 
 const createName = (string) => {
   const initial = string.slice(0, 1).toLowerCase();
@@ -108,9 +108,9 @@ const createName = (string) => {
   return initial + name;
 }
 
-const ButtonWrapper = ({onClick, children, color}) => (
+const ButtonWrapper = ({onClick, children, color, isVerified}) => (
   <Wrapper>
-    <Button onClick={onClick} color={color}>{children}</Button>
+    <Button onClick={onClick} color={color} isVerified={isVerified}>{children}</Button>
   </Wrapper>
 )
 
@@ -163,7 +163,10 @@ const CharForm = ({
   handleAbilities,
   submitBasic,
   submitStats,
-  submitAbilities
+  submitAbilities,
+  basicsVerified,
+  statsVerified,
+  abilitiesVerified
 }) => {
 
   return (
@@ -178,7 +181,7 @@ const CharForm = ({
 
         <InputBlock label="Total XP" placeholder="Total XP" type="number" max="100"/>
         <InputBlock label="Unspent XP" placeholder="Unspent XP" type="number" max="100" />
-        <ButtonWrapper onClick={submitBasic} color={'var(--blue)'}>Save Basic Info</ButtonWrapper>
+        <ButtonWrapper onClick={submitBasic} color={'var(--blue)'} isVerified={basicsVerified}>Save Basic Info</ButtonWrapper>
       </form>
 
       <FatFlourish />
@@ -200,7 +203,7 @@ const CharForm = ({
         <DoubleBlock label="Toughness" type="number"/>
         <DoubleBlock label="Composure" type="number"/>
         <DoubleBlock label="Corruption" type="number"/>
-        <ButtonWrapper onClick={submitStats} color={'var(--blue)'}>Save Stats</ButtonWrapper>
+        <ButtonWrapper onClick={submitStats} color={'var(--blue)'} isVerified={statsVerified}>Save Stats</ButtonWrapper>
 
       </form>
 
@@ -220,7 +223,7 @@ const CharForm = ({
 
         {/* Traits */}
         <TextField label="Traits" placeholder="Traits"/>
-        <ButtonWrapper onClick={submitAbilities} color={'var(--blue)'}>Save Abilities</ButtonWrapper>
+        <ButtonWrapper onClick={submitAbilities} color={'var(--blue)'} isVerified={abilitiesVerified}>Save Abilities</ButtonWrapper>
 
       </form>
     </>

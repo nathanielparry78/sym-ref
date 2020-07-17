@@ -129,7 +129,6 @@ const CharSheet = ({
     <div>
       <Section>
         <Header>
-
           <Name><Image/>{name}</Name>
           <Occupation>{occupation}</Occupation>
           <XP> Unspent XP: {unspentXP} | Total XP: {totalXP} XP)</XP>
@@ -176,7 +175,6 @@ const CharSheet = ({
       <Misc></Misc>
       <Contacts></Contacts>
       <Notes></Notes>
-      <Flourish />
     </div>
   )
 }

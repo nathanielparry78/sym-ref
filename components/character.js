@@ -110,7 +110,4 @@ export const Character = ({name, quote, number, manner, race, resistance, traits
 		</div>
 
 	)
-
-
-
 }
