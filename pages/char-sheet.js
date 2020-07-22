@@ -115,7 +115,7 @@ const CharSheet = ({
     toughness,
     composure,
     corruption
-  },
+  } = {},
   traits,
   gear: {
     weapons,
@@ -133,7 +133,7 @@ const CharSheet = ({
         <Header>
           <Name><Image/>{name}</Name>
           <Occupation>{occupation}</Occupation>
-          <XP> Unspent XP: {unspentXP} | Total XP: {totalXP} XP)</XP>
+          <XP>Unspent XP: {unspentXP} | Total XP: {totalXP}</XP>
         </Header>
       </Section>
       <Section>

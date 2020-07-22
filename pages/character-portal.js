@@ -59,7 +59,7 @@ const DeleteCharacter = () => {
                   <Button color={"var(--blue)"}>Never mind.</Button>
                 </a>
               </Link>
-              <Button onClick={() => window.localStorage.removeItem('character')}>YES! WIPE IT!</Button>
+              <Button onClick={handleDelete}>YES! WIPE IT!</Button>
             </ButtonWrapper>
           </>
         : <>

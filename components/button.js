@@ -62,7 +62,7 @@ const Button = ({children, onClick, className, color = "maroon", isVerified}) =>
 
   const handleClick = () => {
     setClicked(true);
-    onClick()
+    onClick && onClick();
   }
 
   useEffect(() => {

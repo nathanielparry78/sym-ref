@@ -192,13 +192,12 @@ const Character = () => {
     const string = character.name.replace(/\s/g, '')
     const name = `character-${string}`;
 
+    console.log(character)
+
     window.localStorage.setItem('character', JSON.stringify(character));
     setSubmitted(true);
   }
 
-  // console.log(basicsVerified, statsVerified, abilitiesVerified, derivedVerified)
-
-  // console.log(character)
   return (
     <>
       {(storedCharacter === null || storedCharacter === {} || storedCharacter === undefined) && !submitted

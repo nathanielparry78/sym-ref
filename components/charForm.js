@@ -104,7 +104,7 @@ const TextBlock = styled.div`
 
 const createName = (string) => {
   const initial = string.slice(0, 1).toLowerCase();
-  const name = string.slice(1).replace(/\s\./g, '')
+  const name = string.slice(1).replace(/\s\./g, '');
 
   return initial + name;
 }
@@ -186,19 +186,50 @@ const CharForm = ({
   statsVerified,
   abilitiesVerified
 }) => {
+  const [ storedCharacter, setStoredCharacter ] = useState({});
+
+  useEffect(() => {
+    const char = window.localStorage.getItem('character');
+
+    char && setStoredCharacter(JSON.parse(char))
+  }, [])
+
+
+  const {
+    name,
+    occupation,
+    totalXP,
+    unspentXP,
+    stats: {
+      accurate,
+      cunning,
+      discreet,
+      persuasive,
+      quick,
+      resolute,
+      strong,
+      vigilant
+    } = {},
+    abilities,
+    derived: {
+      toughness,
+      composure,
+      corruption
+    } = {},
+    traits} = storedCharacter;
 
   return (
     <>
-      <form onChange={handleBasic}>
+      <form onBlur={handleBasic}>
         {/* Basic Info */}
-        <InputBlock label="Name" placeholder="Name" />
+        <InputBlock label="Name" placeholder={name || "Name"} />
         <InputBlock label="Race" placeholder="Race"/>
-        <InputBlock label="Occupation" placeholder="Occupation"/>
+        <InputBlock label="Occupation" placeholder={occupation || "Occupation"}/>
 
         <Simple/>
 
-        <InputBlock label="Total XP" placeholder="Total XP" type="number" max="100"/>
-        <InputBlock label="Unspent XP" placeholder="Unspent XP" type="number" max="100" />
+        <InputBlock label="Total XP" placeholder={totalXP || "Total XP"} type="number" max="100"/>
+        <InputBlock label="Unspent XP" placeholder={unspentXP || "Unspent XP"} type="number" max="100" />
         <ButtonWrapper onClick={submitBasic} color={'var(--blue)'} isVerified={basicsVerified}>Save Basic Info</ButtonWrapper>
       </form>
 
@@ -206,14 +237,14 @@ const CharForm = ({
 
         {/* Attributes */}
       <form onBlur={handleStats}>
-        <InputBlock label="Accurate" placeholder="5" type="number"/>
-        <InputBlock label="Cunning" placeholder="5" type="number"/>
-        <InputBlock label="Discreet" placeholder="5" type="number"/>
-        <InputBlock label="Persuasive" placeholder="5" type="number"/>
-        <InputBlock label="Quick" placeholder="5" type="number"/>
-        <InputBlock label="Resolute" placeholder="5" type="number"/>
-        <InputBlock label="Strong" placeholder="5" type="number"/>
-        <InputBlock label="Vigilant" placeholder="5" type="number"/>
+        <InputBlock label={accurate || "Accurate"} placeholder="5" type="number"/>
+        <InputBlock label={cunning || "Cunning"} placeholder="5" type="number"/>
+        <InputBlock label={discreet || "Discreet"} placeholder="5" type="number"/>
+        <InputBlock label={persuasive || "Persuasive"} placeholder="5" type="number"/>
+        <InputBlock label={quick || "Quick"} placeholder="5" type="number"/>
+        <InputBlock label={resolute || "Resolute"} placeholder="5" type="number"/>
+        <InputBlock label={strong || "Strong"} placeholder="5" type="number"/>
+        <InputBlock label={vigilant || "Vigilant"} placeholder="5" type="number"/>
       </form>
 
         <Simple/>
@@ -237,12 +268,12 @@ const CharForm = ({
         </pre>
       </TextBlock>
 
-      <form onChange={handleAbilities}>
+      <form onBlur={handleAbilities}>
         {/* Abilities */}
-        <TextField label="Abilities" placeholder="Abilities"/>
+        <TextField label="Abilities" placeholder={abilities || "Abilities"}/>
 
         {/* Traits */}
-        <TextField label="Traits" placeholder="Traits"/>
+        <TextField label="Traits" placeholder={traits || "Traits"}/>
         <ButtonWrapper onClick={submitAbilities} color={'var(--blue)'} isVerified={abilitiesVerified}>Save Abilities</ButtonWrapper>
 
       </form>
