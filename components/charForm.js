@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Simple, Flourish } from '../components/dividers';
 import Button from '../components/button';
@@ -123,7 +124,7 @@ const TextField = ({label, placeholder, type = "text", onChange}) => (
 const InputBlock = ({handleChange, label, placeholder, type = "text", min = "5", max = "20"}) => (
   <Label><span>{label}</span>
     <Input
-      onChange={handleChange}
+      onBlur={handleChange}
       name={createName(label)}
       type={type}
       min={min}
@@ -131,36 +132,53 @@ const InputBlock = ({handleChange, label, placeholder, type = "text", min = "5",
       placeholder={placeholder}
     />
   </Label>
-)
+);
 
-const DoubleBlock = ({handleChange, label, placeholder, type = "text", min = "5", max = "20"}) => (
-  <Double><span>{label}</span>
-    <Input
-      onChange={handleChange}
-      name={`${createName(label)}-current`}
-      type={type}
-      min={min}
-      max={max}
-      placeholder="Cur."
-      gridArea={"input1"}
-    />
-    <Input
-      onChange={handleChange}
-      name={`${createName(label)}-max`}
-      type={type}
-      min={min}
-      max={max}
-      placeholder="Max"
-      gridArea={"input2"}
-    />
-  </Double>
 
-)
+const DoubleBlock = ({handleDerived, label, placeholder, type = "text", min = "5", max = "20"}) => {
+  const [ current, setCurrent ] = useState(null);
+  const [ statMax, setStatMax ] = useState(null);
+
+  useEffect(() => {
+    if (current && statMax) {
+      handleDerived({
+        [label.toLowerCase()]: {
+          current: current,
+          max: statMax
+        }
+      })
+    }
+  }, [current, statMax])
+
+  return (
+    <Double><span>{label}</span>
+      <Input
+        onBlur={(e) => setCurrent(e.target.value)}
+        type="number"
+        min={min}
+        max={max}
+        placeholder="Cur."
+        gridArea={"input1"}
+      />
+      <Input
+        onBlur={(e) => setStatMax(e.target.value)}
+        type="number"
+        min={min}
+        max={max}
+        placeholder="Max"
+        gridArea={"input2"}
+      />
+    </Double>
+  )
+};
+
+
 
 const CharForm = ({
   handleBasic,
   handleStats,
   handleAbilities,
+  handleDerived,
   submitBasic,
   submitStats,
   submitAbilities,
@@ -186,8 +204,8 @@ const CharForm = ({
 
       <FatFlourish />
 
-      <form onChange={handleStats}>
         {/* Attributes */}
+      <form onBlur={handleStats}>
         <InputBlock label="Accurate" placeholder="5" type="number"/>
         <InputBlock label="Cunning" placeholder="5" type="number"/>
         <InputBlock label="Discreet" placeholder="5" type="number"/>
@@ -196,16 +214,18 @@ const CharForm = ({
         <InputBlock label="Resolute" placeholder="5" type="number"/>
         <InputBlock label="Strong" placeholder="5" type="number"/>
         <InputBlock label="Vigilant" placeholder="5" type="number"/>
+      </form>
 
         <Simple/>
 
         {/* Derived Attributes */}
-        <DoubleBlock label="Toughness" type="number"/>
-        <DoubleBlock label="Composure" type="number"/>
-        <DoubleBlock label="Corruption" type="number"/>
-        <ButtonWrapper onClick={submitStats} color={'var(--blue)'} isVerified={statsVerified}>Save Stats</ButtonWrapper>
-
+      <form>
+        <DoubleBlock handleDerived={handleDerived} label="Toughness" type="number"/>
+        <DoubleBlock handleDerived={handleDerived} label="Composure" type="number"/>
+        <DoubleBlock handleDerived={handleDerived} label="Corruption" type="number"/>
       </form>
+
+        <ButtonWrapper onClick={submitStats} color={'var(--blue)'} isVerified={statsVerified}>Save Stats</ButtonWrapper>
 
       <FatFlourish />
       <TextBlock>

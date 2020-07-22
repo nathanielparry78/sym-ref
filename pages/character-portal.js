@@ -41,7 +41,8 @@ const DeleteCharacter = () => {
   }, [])
 
   const handleDelete = () => {
-    window.localStorage.removeItem('character')
+    console.log("clicky");
+    window.localStorage.removeItem('character');
   }
 
   return (
@@ -55,15 +56,10 @@ const DeleteCharacter = () => {
             <ButtonWrapper>
               <Link href="../character">
                 <a>
-                  <Button color={"var(--blue)"} onClick={handleDelete}>Never mind.</Button>
+                  <Button color={"var(--blue)"}>Never mind.</Button>
                 </a>
               </Link>
-
-              <Link href="../character">
-                <a>
-                  <Button>YES! WIPE IT!</Button>
-                </a>
-              </Link>
+              <Button onClick={() => window.localStorage.removeItem('character')}>YES! WIPE IT!</Button>
             </ButtonWrapper>
           </>
         : <>

@@ -44,11 +44,14 @@ const Character = () => {
   const [ stats, setStats ] = useState([]);
   const [ statsVerified, setStatsVerified] = useState(false);
 
+  const [ derived, setDerived ] = useState({});
+  const [ derivedVerified, setDerivedVerified ] = useState(false);
+
   const [ abilities, setAbilities ] = useState({});
   const [ abilitiesVerified, setAbilitiesVerified] = useState(false);
 
   const [ storedCharacter, setStoredCharacter ] = useState(null);
-  const [ submitted, setSumbitted ] = useState(false);
+  const [ submitted, setSubmitted ] = useState(false);
 
   useEffect(() => {
     const char = window.localStorage.getItem('character');
@@ -64,15 +67,18 @@ const Character = () => {
     })
   }
 
+  const handleDerived = (values) => {
+    setDerived({
+      ...derived,
+      ...values
+    })
+  }
+
   const handleStats = (e) => {
     const update = [...stats];
 
     if (e.target.value >= 0 && e.target.value < 20) {
       const { name, value } = e.target;
-
-      const statName = name.includes('-')
-        ? name.split('-')[0]
-        : name
 
       const construct = (stat, value) => {
         let newStat = {}
@@ -83,29 +89,22 @@ const Character = () => {
             : `+${10 - value}`
         )
 
-        if (name.includes('-')) {
-          newStat = {
-            ...stat,
-            name: statName,
-            [name.includes('cur') ? "current" : "max"]: value,
-          }
-        } else {
-          newStat = {
-            name: statName,
-            value: value,
-            mod: getMod(value)
-          }
+        newStat = {
+          name: name,
+          value: value,
+          mod: getMod(value)
         }
+
         return newStat;
       }
 
-      const isPresent = stats.findIndex(item => item.name === statName);
+      const isPresent = stats.findIndex(item => item.name === name);
 
       if (isPresent > -1) {
         update[isPresent] = construct(update[isPresent], value);
         setStats(update);
       } else {
-        update.push(construct());
+        update.push(construct(e.target.name, e.target.value));
         setStats(update);
       }
     }
@@ -127,12 +126,17 @@ const Character = () => {
     })
   }, [basicsVerified])
 
+
   useEffect(() => {
-    setCharacter({
-      stats,
-      ...character
-    })
-  }, [statsVerified])
+    if (statsVerified && derivedVerified) {
+      setCharacter({
+        derived,
+        stats,
+        ...character
+      })
+    }
+  }, [statsVerified, derivedVerified])
+
 
   useEffect(() => {
     setCharacter({
@@ -152,32 +156,35 @@ const Character = () => {
       ) {
       setBasicsVerified(true)
     } else {
-      console.log("Basic error")
+      console.log("Basic error", basic)
     }
   }
 
   const submitStats = () => {
-    const verified = stats.some(item => {
-      item.name === "" && item.value === ""
-    })
+    let statsVerified = false;
+    let derivedVerified = false;
 
-    console.log(stats)
-
-    console.log(verified)
-
-    if (verified) {
-      setStatsVerified(true)
-
+    if (stats.length === 8 && stats.some(item => item.value !== "")) {
+      statsVerified = true;
     } else {
-      console.log("Stats error")
+      console.log("Stats error", basic)
     }
+
+    if (Object.keys(derived).length === 3) {
+      derivedVerified = true;
+    } else {
+      console.log("Derived error", derived)
+    }
+
+    setDerivedVerified(derivedVerified);
+    setStatsVerified(statsVerified && derivedVerified);
   }
 
   const submitAbilities = () => {
     if (abilities !== "") {
       setAbilitiesVerified(true)
     } else {
-      console.log("Abilities error")
+      console.log("Abilities error", abilities)
     }
   }
 
@@ -189,8 +196,9 @@ const Character = () => {
     setSubmitted(true);
   }
 
-  console.log(basicsVerified, statsVerified, abilitiesVerified)
+  // console.log(basicsVerified, statsVerified, abilitiesVerified, derivedVerified)
 
+  // console.log(character)
   return (
     <>
       {(storedCharacter === null || storedCharacter === {} || storedCharacter === undefined) && !submitted
@@ -205,6 +213,8 @@ const Character = () => {
                 handleStats={handleStats}
                 submitStats={submitStats}
                 statsVerified={statsVerified}
+
+                handleDerived={handleDerived}
 
                 handleAbilities={handleAbilities}
                 submitAbilities={submitAbilities}

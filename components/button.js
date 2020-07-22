@@ -69,6 +69,7 @@ const Button = ({children, onClick, className, color = "maroon", isVerified}) =>
     setVerified(isVerified)
   }, [isVerified])
 
+
   return (
     <Clicker onClick={handleClick} className={className} color={color} clicked={clicked} verified={verified}>
       {!clicked
