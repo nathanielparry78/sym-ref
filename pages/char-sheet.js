@@ -97,11 +97,17 @@ const Stats = styled.div`
 const AbilityBlock = styled(Section)`
 `
 
+const Gear = styled(Section)``;
+
 const Weapons = styled.div``
+const Defense = styled.div``
 const Armor = styled.div``
 const Misc = styled.div``
 const Contacts = styled.div``
-const Notes = styled.div``
+const Notes = styled(Section)`
+  font-size: 1.25rem;
+  padding-bottom: 2rem;
+`
 
 
 const CharSheet = ({
@@ -117,11 +123,16 @@ const CharSheet = ({
     corruption
   } = {},
   traits,
+  combat: {
+    attack
+  } = {},
   gear: {
     weapons,
     armor,
     misc
   } = {},
+  defense,
+  painThreshold,
   contacts,
   notes
 }) => {
@@ -156,6 +167,20 @@ const CharSheet = ({
           </Stats>
         </StatsWrapper>
       </Section>
+      {(weapons || armor) &&
+        <Gear>
+          <Weapons><strong>Weapons:</strong> {weapons}</Weapons>
+          <Armor><strong>Armor:</strong> {armor}</Armor><br/>
+          <Defense><strong>Defense:</strong> {defense}</Defense>
+          <Defense><strong>Pain Threshold:</strong> {painThreshold}</Defense>
+        </Gear>
+      }
+      {notes &&
+        <Notes>{notes}</Notes>
+      }
+      {attack &&
+        <Section></Section>
+      }
       {abilities &&
         <AbilityBlock>
           <Heading>Abilities</Heading>
@@ -172,11 +197,8 @@ const CharSheet = ({
           <Flourish />
         </AbilityBlock>
       }
-      <Weapons></Weapons>
-      <Armor></Armor>
       <Misc></Misc>
       <Contacts></Contacts>
-      <Notes></Notes>
     </div>
   )
 }
