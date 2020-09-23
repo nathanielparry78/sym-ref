@@ -1,23 +1,21 @@
-import admin from 'firebase-admin';
+// Firebase App (the core Firebase SDK) is always required and
+// must be listed before other Firebase SDKs
+import * as firebase from "firebase/app";
 
-try {
-  admin.initializeApp({
-    credential: admin.credential.cert({
-      project_id: process.env.FIREBASE_PROJECT_ID,
-      private_key: process.env.FIREBASE_PRIVATE_KEY,
-      client_email: process.env.FIREBASE_CLIENT_EMAIL
-    }),
-    databaseURL: 'https://vercel-serverless.firebaseio.com'
-  });
-} catch (error) {
-  /*
-   * We skip the "already exists" message which is
-   * not an actual error when we're hot-reloading.
-   */
-  if (!/already exists/u.test(error.message)) {
-    // eslint-disable-next-line no-console
-    console.error('Firebase admin initialization error', error.stack);
-  }
-}
+// Add the Firebase services that you want to use
+import "firebase/auth";
+import "firebase/firestore";
 
-export default admin.firestore();
+// TODO: Replace the following with your app's Firebase project configuration
+var firebaseConfig = {
+  apiKey: "AIzaSyClOxNUeMGRedsu8arzoq3JOZ-DSFdrQvg",
+  authDomain: "sym-ref.firebaseapp.com",
+  databaseURL: "https://sym-ref.firebaseio.com",
+  projectId: "sym-ref",
+  storageBucket: "sym-ref.appspot.com",
+  messagingSenderId: "123701362737",
+  appId: "1:123701362737:web:f29964a74ba4fe111e5510"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);

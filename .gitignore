@@ -27,3 +27,4 @@ yarn-debug.log*
 yarn-error.log*
 
 /functions/sym-ref-firebase-adminsdk-33tov-27dd9a1a8e.json
+.vercel

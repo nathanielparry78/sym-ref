@@ -13,6 +13,7 @@ const Section = styled.section`
   margin-bottom: .5rem;
   box-shadow: var(--shadowDark);
   position: relative;
+  min-width: 370px;
 `
 
 const Header = styled.div`

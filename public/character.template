@@ -1,0 +1,28 @@
+abilities: "Ability (master), Other Ability (I), Trait (I)",
+derived: {
+  composure: {current: "0", max: "0"},
+  corruption: {current: "0", max: "0"},
+  toughness: {current: "0", max: "0"}
+},
+name: "Name Goes here",
+occupation: "Kicker of Jerks",
+race: "Ambrian",
+stats: [
+  {name: "accurate", value: "7", mod: "+3"},
+  {name: "cunning", value: "11", mod: "-1"},
+  {name: "discreet", value: "5", mod: "+5"},
+  {name: "persuasive", value: "17", mod: "-7"},
+  {name: "quick", value: "9", mod: "+1"},
+  {name: "resolute", value: "15", mod: "-5"},
+  {name: "strong", value: "10", mod: "+0"},
+  {name: "vigilant", value: "10", mod: "+0"}
+],
+totalXP: "10",
+unspentXP: "10",
+gear: {
+  weapons: "Super Sword of Doom 1d34, Blowdarts",
+  armor: "Armor and crap"
+},
+defense: "+1",
+painThreshold: "5",
+notes: "Anything you want to be added."

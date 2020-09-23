@@ -1,4 +1,5 @@
 import CharSheet from "./char-sheet";
+import Saving from "../components/saving";
 
 const character = {
   abilities: "Blessed Shield (master), Exceptionally Persuasive (adept), Exceptionally Resolute (adept), Leader (master), Loremaster (novice), Prios’ Burning Glass (adept), Ritualist (adept, Command Confession, Exorcism, Sanctifying Rite), Theurgy (master)",
@@ -32,7 +33,10 @@ const character = {
 }
 
 const Elfeno = () => (
-  <CharSheet {...character} />
+  <>
+    <Saving></Saving>
+    <CharSheet {...character} />
+  </>
 )
 
 export default Elfeno;
