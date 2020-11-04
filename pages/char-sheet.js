@@ -171,7 +171,8 @@ const CharSheet = ({
       {(weapons || armor) &&
         <Gear>
           <Weapons><strong>Weapons:</strong> {weapons}</Weapons>
-          <Armor><strong>Armor:</strong> {armor}</Armor><br/>
+          <Armor><strong>Armor:</strong> {armor}</Armor>
+          {misc && <Misc><strong>Misc:</strong> {misc}</Misc>}<br/>
           <Defense><strong>Defense:</strong> {defense}</Defense>
           <Defense><strong>Pain Threshold:</strong> {painThreshold}</Defense>
         </Gear>

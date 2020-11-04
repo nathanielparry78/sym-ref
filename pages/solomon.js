@@ -1,7 +1,7 @@
 import CharSheet from "./char-sheet";
 
 const character = {
-  abilities: "Alchemy (adept), Man-at-arms (adept), Siege Expert (adept), Two-handed Force (novice), Strangler (adept), Tactician (master)",
+  abilities: "Alchemy (adept), Man-at-Arms (adept), Siege Expert (adept), Two-handed Force (novice), Strangler (adept), Tactician (master)",
   derived: {
     composure: {current: "11", max: "11"},
     corruption: {current: "0", max: "0"},
@@ -23,8 +23,9 @@ const character = {
   totalXP: "10",
   unspentXP: "10",
   gear: {
-    weapons: "Portable Firetube: 6 charges (area cone, flaming), Firetube as Warhammer 6 (blood-letting, massive, unwieldy), 3 Choking Spores, 3 Alchemical Grenades",
-    armor: "Double Chain Mail 5 (reinforced)"
+    weapons: "Portable Firetube: 6 charges [1d12] (area cone, flaming), Firetube as Warhammer [1d10] (blood-letting, massive, unwieldy)",
+    armor: "Double Chain Mail [1d6+1] (reinforced)",
+    misc: "3 Choking Spores, 3 Alchemical Grenades"
   },
   defense: "-1",
   painThreshold: "7",

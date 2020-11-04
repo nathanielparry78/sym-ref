@@ -1,7 +1,7 @@
 import CharSheet from "./char-sheet";
 
 const character = {
-  abilities: "Anathema (master), Brimstone Cascade (master), Exceptionally Cunning (adept), Exceptionally Resolute (master), Flame Wall (master), Loremaster (master), Recovery (adept), Ritualist (master, Break Link, Clairvoy- ance, Magic Circle, Seven-le- ague Stride, Soul Stone, Tale↵of Ashes), Steadfast (adept), Wizardry (master)",
+  abilities: "Anathema (master), Brimstone Cascade (master), Exceptionally Cunning (adept), Exceptionally Resolute (master), Flame Wall (master), Loremaster (master), Recovery (adept), Steadfast (adept), Wizardry (master)",
   derived: {
     composure: {current: "16", max: "16"},
     corruption: {current: "0", max: "0"},
@@ -24,7 +24,7 @@ const character = {
   unspentXP: "0",
   gear: {
     weapons: "None",
-    armor: "Order Cloak 2 (flexible) + 3 (protective amulet)"
+    armor: "Order Cloak [1d4] (flexible) + 3 (protective amulet)"
   },
   defense: "+5",
   painThreshold: "4",
