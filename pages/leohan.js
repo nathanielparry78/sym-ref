@@ -23,8 +23,8 @@ stats: [
   totalXP: "10",
   unspentXP: "10",
   gear: {
-    weapons: "Bastard Sword 12 (precise), +3 if Berserker, +3 against Abominations/Undead",
-    armor: "Templar Full Plate 5 (holy)"
+    weapons: "Bastard Sword [1d8] (precise), +3 if Berserker, +3 against Abominations/Undead",
+    armor: "Templar Full Plate [1d8 + 1d4] (holy)"
   },
   defense: "3, +5 if Berserker",
   painThreshold: "8",
